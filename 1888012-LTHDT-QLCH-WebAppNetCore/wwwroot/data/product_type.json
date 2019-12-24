@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "Name": "Sua",
+    "DateAdded": "2019-10-28T15:34:02.443353+07:00",
+    "Status": "Con su dung"
+  },
+  {
+    "Id": 2,
+    "Name": "Bia",
+    "DateAdded": "2019-10-28T15:34:02.44365+07:00",
+    "Status": "Con su dung"
+  },
+  {
+    "Id": 3,
+    "Name": "Banh",
+    "DateAdded": "2019-10-31T00:00:00",
+    "Status": "Con su dung"
+  },
+  {
+    "Id": 4,
+    "Name": "Nuoc",
+    "DateAdded": "2019-11-06T00:00:00",
+    "Status": "Con su dung"
+  },
+  {
+    "Id": 5,
+    "Name": "Keo",
+    "DateAdded": "2019-09-01T00:00:00",
+    "Status": "Con su dung"
+  },
+  {
+    "Id": 6,
+    "Name": "Bot",
+    "DateAdded": "2019-05-11T00:00:00",
+    "Status": "Con su dung"
+  },
+  {
+    "Id": 7,
+    "Name": "Kem",
+    "DateAdded": "2019-06-11T00:00:00",
+    "Status": "Con su dung"
+  }
+]

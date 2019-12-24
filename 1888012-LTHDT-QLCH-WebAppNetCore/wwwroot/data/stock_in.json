@@ -1,0 +1,44 @@
+[
+  {
+    "detailId": 1,
+    "detailUser": "abc",
+    "detailDateAdded": "2019-11-04T10:54:10.0144137+07:00",
+    "detailProductList": "[{\u0022Id\u0022:2,\u0022Name\u0022:\u0022Bia den\u0022,\u0022DateAdded\u0022:\u00222019-10-28T09:37:59.9559242\u002B07:00\u0022,\u0022MfgName\u0022:\u0022Budweiser\u0022,\u0022MfgDate\u0022:\u00222019-10-28T09:37:59.9559247\u002B07:00\u0022,\u0022ExpiredDate\u0022:\u00222020-01-26T09:37:59.9559248\u002B07:00\u0022,\u0022Type\u0022:\u0022Bia\u0022,\u0022Stock\u0022:50},{\u0022Id\u0022:4,\u0022Name\u0022:\u0022Bia do\u0022,\u0022DateAdded\u0022:\u00220001-01-01T00:00:00\u0022,\u0022MfgName\u0022:\u0022Heniken\u0022,\u0022MfgDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022Type\u0022:\u0022Bia\u0022,\u0022Stock\u0022:0}]",
+    "detailStockChange": "[{\u0022stockId\u0022:2,\u0022stockChange\u0022:5},{\u0022stockId\u0022:4,\u0022stockChange\u0022:5}]"
+  },
+  {
+    "detailId": 2,
+    "detailUser": "xyz",
+    "detailDateAdded": "2019-11-04T11:03:07.4323302+07:00",
+    "detailProductList": "[{\u0022Id\u0022:1,\u0022Name\u0022:\u0022Sua bo\u0022,\u0022DateAdded\u0022:\u00222019-10-28T09:37:59.9547699\u002B07:00\u0022,\u0022MfgName\u0022:\u0022Vinamilk\u0022,\u0022MfgDate\u0022:\u00222019-10-28T09:37:59.9557739\u002B07:00\u0022,\u0022ExpiredDate\u0022:\u00222019-11-27T09:37:59.9558233\u002B07:00\u0022,\u0022Type\u0022:\u0022Sua\u0022,\u0022Stock\u0022:50},{\u0022Id\u0022:2,\u0022Name\u0022:\u0022Bia den\u0022,\u0022DateAdded\u0022:\u00222019-10-28T09:37:59.9559242\u002B07:00\u0022,\u0022MfgName\u0022:\u0022Budweiser\u0022,\u0022MfgDate\u0022:\u00222019-10-28T09:37:59.9559247\u002B07:00\u0022,\u0022ExpiredDate\u0022:\u00222020-01-26T09:37:59.9559248\u002B07:00\u0022,\u0022Type\u0022:\u0022Bia\u0022,\u0022Stock\u0022:50}]",
+    "detailStockChange": "[{\u0022stockId\u0022:1,\u0022stockChange\u0022:2},{\u0022stockId\u0022:2,\u0022stockChange\u0022:3}]"
+  },
+  {
+    "detailId": 3,
+    "detailUser": "abcxyz",
+    "detailDateAdded": "2019-11-04T12:12:33.7184379+07:00",
+    "detailProductList": "[{\u0022Id\u0022:1,\u0022Name\u0022:\u0022Sua bo\u0022,\u0022DateAdded\u0022:\u00222019-10-28T09:37:59.9547699\u002B07:00\u0022,\u0022MfgName\u0022:\u0022Vinamilk\u0022,\u0022MfgDate\u0022:\u00222019-10-28T09:37:59.9557739\u002B07:00\u0022,\u0022ExpiredDate\u0022:\u00222019-11-27T09:37:59.9558233\u002B07:00\u0022,\u0022Type\u0022:\u0022Sua\u0022,\u0022Stock\u0022:50},{\u0022Id\u0022:2,\u0022Name\u0022:\u0022Bia den\u0022,\u0022DateAdded\u0022:\u00222019-10-28T09:37:59.9559242\u002B07:00\u0022,\u0022MfgName\u0022:\u0022Budweiser\u0022,\u0022MfgDate\u0022:\u00222019-10-28T09:37:59.9559247\u002B07:00\u0022,\u0022ExpiredDate\u0022:\u00222020-01-26T09:37:59.9559248\u002B07:00\u0022,\u0022Type\u0022:\u0022Bia\u0022,\u0022Stock\u0022:50},{\u0022Id\u0022:3,\u0022Name\u0022:\u0022Banh ngot\u0022,\u0022DateAdded\u0022:\u00222019-10-31T00:00:00\u0022,\u0022MfgName\u0022:\u0022Kinh do\u0022,\u0022MfgDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00222019-10-31T00:00:00\u0022,\u0022Type\u0022:\u0022Banh\u0022,\u0022Stock\u0022:0},{\u0022Id\u0022:4,\u0022Name\u0022:\u0022Bia do\u0022,\u0022DateAdded\u0022:\u00220001-01-01T00:00:00\u0022,\u0022MfgName\u0022:\u0022Heniken\u0022,\u0022MfgDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022Type\u0022:\u0022Bia\u0022,\u0022Stock\u0022:0}]",
+    "detailStockChange": "[{\u0022stockId\u0022:1,\u0022stockChange\u0022:5},{\u0022stockId\u0022:2,\u0022stockChange\u0022:5},{\u0022stockId\u0022:3,\u0022stockChange\u0022:5},{\u0022stockId\u0022:4,\u0022stockChange\u0022:5}]"
+  },
+  {
+    "detailId": 4,
+    "detailUser": "dasdas",
+    "detailDateAdded": "2019-11-05T17:07:36.5457646+07:00",
+    "detailProductList": "[{\u0022Id\u0022:2,\u0022Name\u0022:\u0022Bia den\u0022,\u0022DateAdded\u0022:\u00222019-10-28T09:37:59.9559242\u002B07:00\u0022,\u0022MfgName\u0022:\u0022Budweiser\u0022,\u0022MfgDate\u0022:\u00222019-10-28T09:37:59.9559247\u002B07:00\u0022,\u0022ExpiredDate\u0022:\u00222020-01-26T09:37:59.9559248\u002B07:00\u0022,\u0022Type\u0022:\u0022Bia\u0022,\u0022Stock\u0022:52},{\u0022Id\u0022:3,\u0022Name\u0022:\u0022Banh ngot\u0022,\u0022DateAdded\u0022:\u00222019-10-31T00:00:00\u0022,\u0022MfgName\u0022:\u0022Kinh do\u0022,\u0022MfgDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00222019-10-31T00:00:00\u0022,\u0022Type\u0022:\u0022Banh\u0022,\u0022Stock\u0022:17},{\u0022Id\u0022:4,\u0022Name\u0022:\u0022Bia do\u0022,\u0022DateAdded\u0022:\u00220001-01-01T00:00:00\u0022,\u0022MfgName\u0022:\u0022Heniken\u0022,\u0022MfgDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022Type\u0022:\u0022Bia\u0022,\u0022Stock\u0022:17}]",
+    "detailStockChange": "[{\u0022stockId\u0022:2,\u0022stockChange\u0022:3},{\u0022stockId\u0022:3,\u0022stockChange\u0022:3},{\u0022stockId\u0022:4,\u0022stockChange\u0022:3}]"
+  },
+  {
+    "detailId": 5,
+    "detailUser": "abc",
+    "detailDateAdded": "2019-11-06T14:19:54.7422474+07:00",
+    "detailProductList": "[{\u0022Id\u0022:5,\u0022Name\u0022:\u0022Nuoc suoi\u0022,\u0022DateAdded\u0022:\u00220001-01-01T00:00:00\u0022,\u0022MfgName\u0022:\u0022Lavie\u0022,\u0022MfgDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022Type\u0022:\u0022Nuoc\u0022,\u0022Stock\u0022:10},{\u0022Id\u0022:6,\u0022Name\u0022:\u0022Cocacola\u0022,\u0022DateAdded\u0022:\u00222019-02-11T00:00:00\u0022,\u0022MfgName\u0022:\u0022Cocacola\u0022,\u0022MfgDate\u0022:\u00222019-02-11T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00222019-02-11T00:00:00\u0022,\u0022Type\u0022:\u0022Nuoc\u0022,\u0022Stock\u0022:10}]",
+    "detailStockChange": "[{\u0022stockId\u0022:5,\u0022stockChange\u0022:10},{\u0022stockId\u0022:6,\u0022stockChange\u0022:10}]"
+  },
+  {
+    "detailId": 6,
+    "detailUser": "abc",
+    "detailDateAdded": "2019-11-06T14:23:01.1236657+07:00",
+    "detailProductList": "[{\u0022Id\u0022:5,\u0022Name\u0022:\u0022Nuoc suoi\u0022,\u0022DateAdded\u0022:\u00220001-01-01T00:00:00\u0022,\u0022MfgName\u0022:\u0022Lavie\u0022,\u0022MfgDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022Type\u0022:\u0022Nuoc\u0022,\u0022Stock\u0022:10},{\u0022Id\u0022:6,\u0022Name\u0022:\u0022Cocacola\u0022,\u0022DateAdded\u0022:\u00222019-02-11T00:00:00\u0022,\u0022MfgName\u0022:\u0022Cocacola\u0022,\u0022MfgDate\u0022:\u00222019-02-11T00:00:00\u0022,\u0022ExpiredDate\u0022:\u00222019-02-11T00:00:00\u0022,\u0022Type\u0022:\u0022Nuoc\u0022,\u0022Stock\u0022:10}]",
+    "detailStockChange": "[{\u0022stockId\u0022:5,\u0022stockChange\u0022:10},{\u0022stockId\u0022:6,\u0022stockChange\u0022:10}]"
+  }
+]

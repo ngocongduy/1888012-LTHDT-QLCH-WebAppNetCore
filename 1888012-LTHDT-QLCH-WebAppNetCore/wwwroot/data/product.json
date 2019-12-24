@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "Name": "Sua bo",
+    "DateAdded": "2019-10-28T09:37:59.9547699+07:00",
+    "MfgName": "Vinamilk",
+    "MfgDate": "2019-10-28T09:37:59.9557739+07:00",
+    "ExpiredDate": "2019-11-27T09:37:59.9558233+07:00",
+    "Type": "Sua",
+    "Stock": 46
+  },
+  {
+    "Id": 2,
+    "Name": "Bia den",
+    "DateAdded": "2019-03-11T00:00:00",
+    "MfgName": "Budweiser",
+    "MfgDate": "2019-10-28T09:37:59",
+    "ExpiredDate": "2019-03-11T00:00:00",
+    "Type": "Bia",
+    "Stock": 51
+  },
+  {
+    "Id": 3,
+    "Name": "Banh ngot",
+    "DateAdded": "2019-10-31T00:00:00",
+    "MfgName": "Kinh do",
+    "MfgDate": "0001-01-01T00:00:00",
+    "ExpiredDate": "2019-10-31T00:00:00",
+    "Type": "Banh",
+    "Stock": 11
+  },
+  {
+    "Id": 4,
+    "Name": "Bia do",
+    "DateAdded": "0001-01-01T00:00:00",
+    "MfgName": "Heniken",
+    "MfgDate": "0001-01-01T00:00:00",
+    "ExpiredDate": "0001-01-01T00:00:00",
+    "Type": "Bia",
+    "Stock": 11
+  },
+  {
+    "Id": 5,
+    "Name": "Nuoc suoi",
+    "DateAdded": "0001-01-01T00:00:00",
+    "MfgName": "Lavie",
+    "MfgDate": "0001-01-01T00:00:00",
+    "ExpiredDate": "0001-01-01T00:00:00",
+    "Type": "Nuoc",
+    "Stock": 10
+  },
+  {
+    "Id": 6,
+    "Name": "Cocacola",
+    "DateAdded": "2019-02-11T00:00:00",
+    "MfgName": "Cocacola",
+    "MfgDate": "2019-02-11T00:00:00",
+    "ExpiredDate": "2019-02-11T00:00:00",
+    "Type": "Nuoc",
+    "Stock": 10
+  },
+  {
+    "Id": 7,
+    "Name": "Kem TH",
+    "DateAdded": "2019-06-11T00:00:00",
+    "MfgName": "TH True Milk",
+    "MfgDate": "2019-06-11T00:00:00",
+    "ExpiredDate": "2019-06-11T00:00:00",
+    "Type": "Kem",
+    "Stock": 0
+  },
+  {
+    "Id": 8,
+    "Name": "Sua chua",
+    "DateAdded": "2019-11-05T00:00:00",
+    "MfgName": "Vinamilk",
+    "MfgDate": "2019-11-06T00:00:00",
+    "ExpiredDate": "2019-11-30T00:00:00",
+    "Type": "Sua",
+    "Stock": 0
+  }
+]

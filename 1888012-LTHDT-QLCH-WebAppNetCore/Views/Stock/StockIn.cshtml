@@ -1,0 +1,239 @@
+﻿@model StockInViewModel
+@{
+    ViewData["Title"] = "Stock in";
+}
+
+<h1>NHAP HANG</h1>
+
+<div>
+    <div class="row">
+        <div class="col-1"><h4>Ma</h4></div>
+        <div class="col-2"><h4>Ten</h4></div>
+        <div class="col-1"><h4>Loai</h4></div>
+        <div class="col-1"><h4>Ngay tao</h4></div>
+        <div class="col-2"><h4>NSX</h4></div>
+        <div class="col-1"><h4>Ngay SX</h4></div>
+        <div class="col-1"><h4>Han SD</h4></div>
+        <div class="col-1"><h4>Ton kho</h4></div>
+        <div class="col-1"><h4>Chon de them</h4></div>
+        <div class="col-1"><h4>So luong them</h4></div>
+    </div>
+    @{
+        foreach (var product in Model.detailProductList)
+        {
+            <div class="row">
+                <div class="col-1">@product.Id</div>
+                <div class="col-2">@product.Name</div>
+                <div class="col-1">@product.Type</div>
+                <div class="col-1">@product.DateAdded</div>
+                <div class="col-2">@product.MfgName</div>
+                <div class="col-1">@product.MfgDate</div>
+                <div class="col-1">@product.ExpiredDate</div>
+                <div class="col-1">@product.Stock</div>
+                <div class="col-1"><input type="checkbox" name="checkBox_@product.Id" id="@product.Id" /></div>
+                <div class="col-1"><input type="text" name="stockChange_@product.Id" /></div>
+            </div>
+        }
+    }
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <h>Nhap moi o day:</h>
+        <div class="form-group">
+            <label for="txtUser">Nguoi nhap: </label>
+            <input id="txtUser" type="text" />
+        </div>
+        <a class="btn btn-primary" asp-action="StockIn" asp-controller="Stock">Reload</a>
+        <button type="submit" class="btn btn-primary" onclick="sendData();">Tao phieu nhap</button>
+    </div>
+    <div class="col-6">
+        <h>Tim kiem theo ten nguoi nhap bat dau bang ky tu:</h>
+        <div class="form-group">
+            <label for="txtSearchUser">Nguoi nhap: </label>
+            <input id="txtSearchUser" type="text" />
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="search();">Tim kiem</button>
+    </div>
+</div>
+
+
+
+<h1>DANH SACH PHIEU NHAP</h1>
+<div>
+    <div class="row">
+        <div class="col-2"><h4>Ma phieu nhap:</h4></div>
+        <div class="col-2"><h4>Nguoi nhap: </h4></div>
+        <div class="col-2"><h4>Ngay nhap: </h4></div>
+        <div class="col-2"><h4>Xem chi tiet: </h4></div>
+        <div class="col-2"><h4>Cap nhat: </h4></div>
+        <div class="col-2"><h4>Xoa: </h4></div>
+    </div>
+    @{
+        foreach (var note in Model.inList)
+        {
+            <div class="row hidden" name="@String.Format("{0}{1}",note.detailUser,note.detailId)">
+                <div class="col-2">@note.detailId</div>
+                <div class="col-2">@note.detailUser</div>
+                <div class="col-2">@note.detailDateAdded</div>
+                <div class="col-2"><button class="btn btn-primary" name="detailBtn_@note.detailId" onclick="viewDetail(this.name);">Chi tiet</button></div>
+                <div class="col-2"><button class="btn btn-primary" name="updateBtn_@note.detailId" onclick="updateANote(this.name)">Cap nhat</button></div>
+                <div class="col-2"><button class="btn btn-danger" name="deleteBtn_@note.detailId" onclick="deleteANote(this.name)">Xoa</button></div>
+            </div>
+            <div class="row" hidden name="detail_@note.detailId">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-1"><h6>Ma</h6></div>
+                        <div class="col-2"><h6>Ten</h6></div>
+                        <div class="col-1"><h6>Loai</h6></div>
+                        <div class="col-1"><h6>Ngay tao</h6></div>
+                        <div class="col-2"><h6>NSX</h6></div>
+                        <div class="col-1"><h6>Ngay SX</h6></div>
+                        <div class="col-1"><h6>Han SD</h6></div>
+                        <div class="col-3"><h6>So luong them</h6></div>
+                    </div>
+                    @{
+                        foreach (var product in note.detailProductList)
+                        {
+                            <div class="row">
+                                <div class="col-1">@product.Id</div>
+                                <div class="col-2">@product.Name</div>
+                                <div class="col-1">@product.Type</div>
+                                <div class="col-1">@product.DateAdded</div>
+                                <div class="col-2">@product.MfgName</div>
+                                <div class="col-1">@product.MfgDate</div>
+                                <div class="col-1">@product.ExpiredDate</div>
+                                <div class="col-3">@note.detailStockChange.Find(c => c.stockId == product.Id).stockChange</div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+@section Scripts{
+
+    <script src="~/js/stock.js"></script>
+    <script>
+        $("#txtSearchUser").change(search);
+        function search() {
+            //alert($(this).val());
+            var text = $(this).val();
+            if (text != "") {
+                $(".hidden").each(function () {
+                    $(this).attr('hidden', true);
+                    $(`div[name^=${text}]`).each(function () {
+                        $(this).attr('hidden', false);
+                    });
+                });
+            }
+            else {
+                $(".hidden").each(function () {
+                    $(this).attr('hidden', false);
+                });
+            }
+
+        };
+        //Ajax call to send data to server
+        function sendData() {
+
+            var data = getData();
+            //console.log(data);
+            if (data[0] == "") {
+                alert("Wrong, too wrong!");
+                return;
+            }
+            for (var i = 0; i < data[2].length; i++) {
+                if (data[2][i] == "") {
+                    alert("Wrong, too wrong!");
+                    return;
+                }
+            }
+
+            var user = data[0];
+            var selectedItems = data[1];
+            var values = data[2];
+            if (selectedItems.length > 0) {
+                $.ajax({
+                    url: "/Stock/AddStockIn",
+                    type: "post",
+                    //dataType: "json", - old fashion
+                    contextType: "application/json;utf-8",
+                    data: { 'selectedIds': selectedItems, 'selectedValues': values, 'user': user },
+                    traditional: true,
+                    success: function () {
+                        location.reload();
+                    },
+                    error: function (_err) {
+                        alert("Error???");
+                        location.reload();
+                    }
+                });
+            }
+        }
+
+        //Function to delete
+        function deleteANote(name) {
+            var result = confirm("Want to delete?");
+            if (result) {
+                //deleteBtn_
+                var id = name.substring(10);
+
+                if (id > 0) {
+                    $.ajax({
+                        url: "/Stock/DeleteStockIn",
+                        type: "post",
+                        contextType: "application/json;utf-8",
+                        data: { 'selectedId': id },
+                        traditional: true,
+                        success: function () {
+                            location.reload();
+                        },
+                        error: function (_err) {
+                            alert("Error???");
+                            location.reload();
+                        }
+                    });
+                }
+
+            }
+        }
+
+        //Function to submit Deleteform
+        function updateANote(name) {
+            //updateBtn_
+            var id = name.substring(10);
+            var data = getData();
+            console.log(data);
+            if (data[2] == "" || data[0] == "") {
+                alert("Wrong, too wrong!");
+                return;
+            }
+            var user = data[0];
+            var selectedItems = data[1];
+            var values = data[2];
+
+            if (id > 0) {
+                $.ajax({
+                    url: "/Stock/UpdateStockIn",
+                    type: "post",
+                    contextType: "application/json;utf-8",
+                    data: { 'selectedId': id, 'selectedIds': selectedItems, 'selectedValues': values, 'user': user },
+                    traditional: true,
+                    success: function () {
+                        location.reload();
+                    },
+                    error: function (_err) {
+                        alert("Error???");
+                        location.reload();
+                    }
+                });
+            }
+        }
+    </script>
+
+}
+

@@ -1,0 +1,38 @@
+﻿@model SummaryViewModel
+@{
+    ViewData["Title"] = "OutOfDate";
+}
+
+<h1>DANH SACH SAN PHAM HET HAN SU DUNG </h1>
+@{
+    @foreach (var type in Model.typeProductPairs.Keys)
+    {
+        <h3>Loai san pham: @type</h3>
+        <div class="row">
+
+            @foreach (Product product in Model.typeProductPairs[type])
+            {
+                <div class="card col-3">
+                    <div class="card-header text-center">
+                        <h4>@product.Name</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>@product.Id</li>
+                            <li>@product.DateAdded</li>
+                            <li>@product.Type</li>
+                            <li>@product.MfgName</li>
+                            <li>@product.MfgDate</li>
+                            <li>@product.ExpiredDate</li>
+                            <li>@product.Stock</li>
+                        </ul>
+                    </div>
+                </div>
+
+            }
+        </div>
+    }
+
+}
+
+

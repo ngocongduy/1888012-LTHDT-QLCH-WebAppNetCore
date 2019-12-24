@@ -1,0 +1,122 @@
+﻿@model ProductTypeViewModel
+@{
+    ViewData["Title"] = "Product Type";
+}
+
+<h1>ProductType</h1>
+
+<h1>DANH SACH LOAI SAN PHAM</h1>
+<h4>DUNG CAC FORM DE TAO, CAP NHAT VA TIM KIEM LOAI SAN PHAM</h4>
+<h5>Ma se tang tu dong!</h5>
+<hr />
+<div class="row">
+    <!--Add form-->
+    <div class="col-4">
+        <h4>TAO LOAI SAN PHAM MOI</h4>
+        <form method="post" asp-action="CreateAProductType" asp-controller="Product">
+            <input hidden type="text" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name">Ten: </label>
+                <input type="text" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateAdded">Ngay tao: </label>
+                <input type="datetime" class="datepicker" asp-for="DateAdded" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Status">Tinh trang: </label>
+                <input type="text" asp-for="Status" />
+            </div>
+            <div>
+                <button type="submit">Tao loai san pham</button>
+            </div>
+        </form>
+    </div>
+    <!--Update form-->
+    <div class="col-4">
+        <h4>CAP NHAT LOAI SAN PHAM</h4>
+        <h6>Chon san pham can cap nhat hoac xoa o radio button theo san pham</h6>
+        <h6>Neu cap nhat san pham thi dien du thong tin va click vao button cap nhat</h6>
+        <h6>Neu muon xoa thi click vao nut xoa</h6>
+        <form method="post" id="updateForm" asp-action="UpdateAProductType" asp-controller="Product">
+            <input hidden type="text" asp-for="Id" id="txtId" />
+            <div class="form-group">
+                <label asp-for="Name">Ten: </label>
+                <input type="text" asp-for="Name" id="txtName" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateAdded">Ngay tao: </label>
+                <input type="datetime" class="datepicker" asp-for="DateAdded" id="txtDateAdded" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Status">Tinh trang: </label>
+                <input type="text" asp-for="Status" id="txtStatus" />
+            </div>
+            <button onclick="submitForm();" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    <!--Search form-->
+    <div class="col-4">
+        <h4>TIM KIEM LOAI SAN PHAM</h4>
+        <h6>Tim kiem theo Ma neu nhap Ma > 0, nguoc lai se tim kiem theo Ten + Tinh trang. Neu khong co thi chi tim theo ten</h6>
+        <h6>Ket qua tim kiem se tra ve trang Tim kiem (tai day co the tiep tuc thuc hien viec cap nhat hoac tim kiem hoac xoa)</h6>
+        <h6> Neu bi loi se tra ve trang Loai san pham</h6>
+        <div asp-validation-summary="All"></div>
+        <form method="post" asp-action="SearchType" asp-controller="Product">
+            <div class="form-group">
+                <label asp-for="Id">Ma: </label>
+                <input type="text" asp-for="Id" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Ten: </label>
+                <input type="text" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Status">Tinh trang: </label>
+                <input type="text" asp-for="Status" />
+            </div>
+            <div>
+                <button type="submit">Tim kiem</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--Hidden delete form-->
+<form hidden method="post" asp-action="DeleteAProductType" asp-controller="Product" id="deleteForm"><input type="text" asp-for="Id" id="txtIdDelete" /></form>
+<hr />
+<div class="row">
+
+    @{
+
+        foreach (ProductType type in Model.productTypes)
+        {
+            <div class="card col-3">
+                <div class="card-header text-center">
+                    <h4 id="name_@type.Id">@type.Name</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li id="id_@type.Id">@type.Id</li>
+                        <li id="addedDate_@type.Id">@type.DateAdded</li>
+                        <li id="status_@type.Id">@type.Status</li>
+                    </ul>
+                    <div><input type="radio" name="trackRadio" class="custom-radio" id="radio_@type.Id" /> Chon de cap nhat hoac xoa!</div>
+                </div>
+                <div class="card-footer text-center">                 
+                    <a onclick="submitFormWithAlert();" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+
+
+
+
+@section Scripts {
+    <script src="~/js/type.js"></script>
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1888012-LTHDT-QLCH-WebAppNetCore", "1888012-LTHDT-QLCH-WebAppNetCore\1888012-LTHDT-QLCH-WebAppNetCore.csproj", "{BE14C078-B4F5-43C9-B2A4-AC5636172D8E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE14C078-B4F5-43C9-B2A4-AC5636172D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE14C078-B4F5-43C9-B2A4-AC5636172D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE14C078-B4F5-43C9-B2A4-AC5636172D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE14C078-B4F5-43C9-B2A4-AC5636172D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDA318C6-6B89-4657-BBF9-6B0F6941B370}
+	EndGlobalSection
+EndGlobal

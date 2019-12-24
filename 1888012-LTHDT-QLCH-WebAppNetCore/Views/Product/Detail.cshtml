@@ -1,0 +1,163 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<h1>DANH SACH SAN PHAM</h1>
+<h4>DUNG CAC FORM DE TAO, CAP NHAT VA TIM KIEM SAN PHAM</h4>
+<h5>Ma san pham se tang tu dong. Thong tin ton kho chi thay doi theo Nhap va Xuat hang!</h5>
+<hr />
+<div class="row">
+    <!--Add new product form-->
+    <div class="col-4">
+        <h4>TAO SAN PHAM MOI</h4>
+        <form method="post" asp-action="CreateAProduct" asp-controller="Product">
+            <input hidden type="text" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name">Ten: </label>
+                <input type="text" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Type">Loai: </label>
+                <input type="text" asp-for="Type" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateAdded">Ngay tao: </label>
+                <input type="datetime" class="datepicker" asp-for="DateAdded" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MfgName">Nha san xuat: </label>
+                <input type="text" asp-for="MfgName" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MfgDate">Ngay san xuat: </label>
+                <input type="datetime" class="datepicker"  asp-for="MfgDate" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpiredDate">Ngay het han: </label>
+                <input type="datetime" class="datepicker"  asp-for="ExpiredDate" />
+            </div>
+            <div hidden class="form-group">
+                <label asp-for="Stock">Stock: </label>
+                <input type="text" readonly asp-for="Stock" />
+            </div>
+            <div>
+                <button type="submit">Tao san pham</button>
+            </div>
+        </form>
+    </div>
+    <!--Update form-->
+    <div class="col-4">
+        <h4>CAP NHAT SAN PHAM</h4>
+        <h6>Chon loai san pham can cap nhat hoac xoa o radio button</h6>
+        <h6>Neu cap nhat thi dien du thong tin va click vao nut cap nhat</h6>
+        <h6>Neu muon xoa thi click vao nut xoa</h6>
+        <form method="post" id="updateForm" asp-action="UpdateAProduct" asp-controller="Product">
+            <input hidden type="text" asp-for="Id" id="txtId" />
+            <div class="form-group">
+                <label asp-for="Name">Ten: </label>
+                <input type="text" asp-for="Name" id="txtName" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Type">Loai: </label>
+                <input type="text" asp-for="Type" id="txtType" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateAdded">Ngay tao: </label>
+                <input type="datetime" class="datepicker" asp-for="DateAdded" id="txtDateAdded" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MfgName">Nha san xuat: </label>
+                <input type="text" asp-for="MfgName" id="txtMfgName" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MfgDate">Ngay san xuat: </label>
+                <input type="datetime" class="datepicker" asp-for="MfgDate" id="txtMfgDate" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpiredDate">Ngay het han: </label>
+                <input type="datetime" class="datepicker" asp-for="ExpiredDate" id="txtDateExpired" />
+            </div>
+            <div hidden class="form-group">
+                <label asp-for="Stock">Ton kho: </label>
+                <input readonly type="text" asp-for="Stock" id="txtStock" />
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    <!--Search form-->
+    <div class="col-4">
+        <h4>TIM KIEM SAN PHAM</h4>
+        <h6>Tim kiem theo Ma neu nhap Ma > 0, nguoc lai se tim kiem theo Ten + (Con han su dung hoac Con ton kho), neu khong chi tim theo ten </h6>
+        <h6>Ket qua tim kiem se tra ve trang Tim kiem (tai day co the thuc hien viec cap nhat hoac tim kiem hoac xoa san pham)</h6>
+        <h6> Neu bi loi se tra ve trang San pham</h6>
+        <div asp-validation-summary="All"></div>
+        <form method="post" asp-action="Search" asp-controller="Product">
+            <div class="form-group">
+                <label asp-for="Id">Ma: </label>
+                <input type="text" asp-for="Id" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Ten: </label>
+                <input type="text" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpiredDate">Ngay het han: </label>
+                <input type="datetime" class="datepicker" asp-for="ExpiredDate" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock">Ton kho: </label>
+                <input type="text" asp-for="Stock" />
+            </div>
+            <div>
+                <button type="submit">Tim kiem san pham</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--Hidden delete form-->
+<form hidden method="post" asp-action="DeleteAProduct" asp-controller="Product" id="deleteForm"><input type="text" asp-for="Id" id="txtIdDelete" /></form>
+<hr />
+<div class="row">
+
+    @{
+
+        foreach (Product product in Model.products)
+        {
+            <div class="card col-3">
+                <div class="card-header text-center">
+                    <h4 id="name_@product.Id">@product.Name</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li id="id_@product.Id">@product.Id</li>
+                        <li id="addedDate_@product.Id">@product.DateAdded</li>
+                        <li id="type_@product.Id">@product.Type</li>
+                        <li id="mfgName_@product.Id">@product.MfgName</li>
+                        <li id="mfgDate_@product.Id">@product.MfgDate</li>
+                        <li id="expiredDate_@product.Id">@product.ExpiredDate</li>
+                        <li id="stock_@product.Id">@product.Stock</li>
+                    </ul>
+                    <div><input type="radio" name="trackRadio" class="custom-radio" id="radio_@product.Id" /> Chon de cap nhat hoac xoa!</div>
+                </div>
+                <div class="card-footer text-center">
+                    <a onclick="submitFormWithAlert();" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+
+
+
+
+@section Scripts {
+    <script src="~/js/product.js"></script>
+}
+
+
+

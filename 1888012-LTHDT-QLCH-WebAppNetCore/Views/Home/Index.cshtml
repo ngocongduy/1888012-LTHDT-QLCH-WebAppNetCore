@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">CUA HANG TAP HOA</h1>
+    <h4>DAY LA TRANG THONG KE SAN PHAM CUA CUA HANG</h4>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <form method="post" asp-action="StockByType" asp-controller="Home">
+            <h4>Thong ke ton kho theo loai san pham</h4><br />
+            <button type="submit">Thong ke</button>
+        </form>
+    </div>
+    <div class="col-6">
+        <form method="post" asp-action="OutOfDate" asp-controller="Home">
+            <h4>Thong ke san pham da het han</h4><br />
+            <button type="submit">Thong ke</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
