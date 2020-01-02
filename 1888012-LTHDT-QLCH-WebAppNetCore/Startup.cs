@@ -6,6 +6,7 @@ using _1888012_LTHDT_QLCH_WebAppNetCore.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -50,6 +51,24 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore
                                  .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
+
+            //Change AccessDenied Route
+            services.ConfigureApplicationCookie(options => {
+                options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
+            });
+
+            //Add claim-based authorization
+            //Remember that role is a claimType (a claim is a key - values pair)
+            services.AddAuthorization(options =>
+            {
+                //To satisfy the policy, user must have all Claims prescribed
+                options.AddPolicy("DeleteRolePolicy", 
+                    policy => policy.RequireClaim("Delete Role"));
+                options.AddPolicy("EditRolePolicy",
+                    policy => policy.RequireClaim("Edit Role"));
+            });
+
+
             //Add DI service here 
             //AddScoped to request for a new service everytime it is called
             services.AddScoped<IProductRepository,MockProductRepository>();

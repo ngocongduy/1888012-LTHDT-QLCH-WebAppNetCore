@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using _1888012_LTHDT_QLCH_WebAppNetCore.Models;
 using _1888012_LTHDT_QLCH_WebAppNetCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -72,16 +74,26 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
             }
             else
             {
-                var result = await userManager.DeleteAsync(user);
-                if (result.Succeeded)
+                try
                 {
-                    return RedirectToAction("ListUser");
+                    var result = await userManager.DeleteAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ListUser");
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View("ListUser");
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                catch (DbUpdateException e)
+                {                
+                    ViewBag.ErrorTitle = $"{user.UserName} is in use";
+                    ViewBag.ErrorMessage = $"{user.UserName} cannot be deleted" +
+                        $" try to remove clamis in the user first!";
+                    return View("Error");
                 }
-                return View("ListUser");
             }
 
         }
@@ -140,6 +152,7 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize(Policy = "DeleteRolePolicy")] //This will add DeleteRolePolicy requirements to controller-oriented authorization
         public async Task<IActionResult> DeleteRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
@@ -242,6 +255,67 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ManageUserClaim(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id: {userId} cannot be found!";
+                return View("Error");
+            }
+            var existingUserClaims = await userManager.GetClaimsAsync(user);
+            var model = new UserClaimViewModel
+            {
+                UserId = userId
+            };
+            foreach (var claim in ClaimStore.AllClaims)
+            {
+                UserClaim userClaim = new UserClaim
+                {
+                    ClaimType = claim.Type
+                };
+
+                if (existingUserClaims.Any(c => c.Type == claim.Type))
+                {
+                    userClaim.IsSelected = true;
+                }
+                model.Claims.Add(userClaim);
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ManageUserClaim(UserClaimViewModel model)
+        {
+            var user = await userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id: {model.UserId} cannot be found!";
+                return View("Error");
+            }
+            var claims = await userManager.GetClaimsAsync(user);
+            var result = await userManager.RemoveClaimsAsync(user, claims);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Cannot remove existing claims in the user!");
+                return View(model);
+            }
+
+            result = await userManager.AddClaimsAsync(user, model.Claims.Where(c => c.IsSelected)
+                                                            .Select(c => new Claim(c.ClaimType, c.ClaimType)));
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Cannot add new claims to the user!");
+                return View(model);
+            }
+
+            return RedirectToAction("EditUser", new { Id = model.UserId });
+        }
+
+        [HttpGet]
+        //You must add policy in both View and Controller for security
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
@@ -270,6 +344,7 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             var role = await roleManager.FindByIdAsync(model.Id);
@@ -377,7 +452,13 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
 
             return RedirectToAction("EditRole", new { Id = roleId });
         }
+        //By default it will return AccessDenied View in Views/Administration first
+        //- if that cannot be found, it will look up in Views/Shared
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
-        
     }
 }

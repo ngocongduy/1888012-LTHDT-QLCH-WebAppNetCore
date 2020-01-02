@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<IdentityRole>
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService authorizationService
 @{
     ViewData["Title"] = "ListRole";
 }
@@ -23,7 +25,12 @@
                 </h5>
             </div>
             <div class="card-footer">
-                <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">Edit</a>
+                @*Claim-based authorization check in View but it may not enough*@
+                @if ((await authorizationService.AuthorizeAsync(User, "EditRolePolicy")).Succeeded)
+                {
+                    <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">Edit</a>
+                }
+
                 <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                     <span id="confirmDeleteSpan_@role.Id" style="display:none;">
                         <span>Are you sure to delete this role?</span>
