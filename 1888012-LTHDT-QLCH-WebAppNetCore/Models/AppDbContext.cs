@@ -15,7 +15,18 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Models
             : base(options) //Pass options from DbContextOptions to DbContext
         {
 
-        } 
+        }
         //public DbSet<Product> Products { get; set; } 
+
+        //Change from default ON DELELTE CASCADE to ON DELETE NO ACTION
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
+                                                    .SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
     }
 }

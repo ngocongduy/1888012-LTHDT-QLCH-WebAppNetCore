@@ -134,6 +134,30 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id: {id} not found!";
+                return View("Error");
+            }
+            else
+            {
+                var result = await roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRole");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View("ListRole");
+            }
+
+        }
 
         [HttpGet]
         public IActionResult ListRole()
