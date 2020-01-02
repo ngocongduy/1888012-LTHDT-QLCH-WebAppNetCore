@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using _1888012_LTHDT_QLCH_WebAppNetCore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
 {
+    //Built-in authorization with roles
+    //using comma to list roles [Authorize(Roles = "Admin, User")] as OR
+    //Add new [Authorize(Roles = "User")] to list roles as AND
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -190,5 +195,7 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
 
             return RedirectToAction("EditRole", new { Id = roleId });
         }
+
+        
     }
 }

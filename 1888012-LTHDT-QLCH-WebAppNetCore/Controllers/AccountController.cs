@@ -113,5 +113,12 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
             }
             return View();
         }
+
+        //Account controller has userManager and signInManager, they will work with roleManager to control user access ability
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
