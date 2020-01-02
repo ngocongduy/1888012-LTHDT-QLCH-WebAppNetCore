@@ -1,0 +1,50 @@
+﻿@model IEnumerable<IdentityUser>
+@{
+    ViewData["Title"] = "ListUser";
+}
+
+<h1>List All Users</h1>
+
+@if (Model.Any())
+{
+    <div><a class="btn btn-primary" asp-controller="Account" asp-action="Register">Add a user</a></div>
+    foreach (var user in Model)
+    {
+        <div class="card">
+            <div class="card-header">
+                User ID: @user.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    User Name: @user.UserName
+                </h5>
+
+            </div>
+            <div class="card-footer">
+                <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+                    <a class="btn btn-primary" asp-route-id="@user.Id" asp-controller="Administration" asp-action="EditUser">Edit</a>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No users created yet!
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a user!
+            </h5>
+            <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Add a user</a>
+        </div>
+        <div class="card-footer">
+
+        </div>
+
+    </div>
+}

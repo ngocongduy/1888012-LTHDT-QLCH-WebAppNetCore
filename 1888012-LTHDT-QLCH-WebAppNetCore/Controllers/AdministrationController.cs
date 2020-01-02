@@ -24,6 +24,89 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
+
+        [HttpGet]
+        public IActionResult ListUser()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            IdentityUser user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id: {id} not found!";
+                return View("Error");
+            }
+            var userClaims = await userManager.GetClaimsAsync(user);
+            var userRoles = await userManager.GetRolesAsync(user);
+
+            var model = new EditUserViewModel {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                Claims = userClaims.Select(c => c.Value).ToList(),
+                Roles = userRoles.ToList()
+
+            };
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            IdentityUser user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id: {id} not found!";
+                return View("Error");
+            }
+            else
+            {
+                var result = await userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUser");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View("ListUser");
+            }
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            IdentityUser user = await userManager.FindByIdAsync(model.Id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id: {model.Id} not found!";
+                return View("Error");
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+                var result = await userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUser");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View(model);
+            }
+
+        }
+
         [HttpGet]
         public IActionResult CreateRole()
         {

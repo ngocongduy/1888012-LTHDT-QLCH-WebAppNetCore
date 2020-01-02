@@ -50,8 +50,12 @@
                         </li>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Administration" asp-action="ListRole">DS roles</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Quan ly</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-controller="Administration" asp-action="ListRole">DS phan quyen</a>
+                                    <a class="dropdown-item" asp-controller="Administration" asp-action="ListUser">DS nguoi dung</a>
+                                </div>
                             </li>
                         }
                     </ul>

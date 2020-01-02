@@ -35,20 +35,32 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,false);
-                if (result.Succeeded)
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user == null)
                 {
-                    //returnUrl parameter is automatically mapped by the framework and pass to our action
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl) )
-                    {
-                        //Use LocalRedirect instead of redirect to avoid open redirect attack
-                        return LocalRedirect(returnUrl);
-                    }
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError(string.Empty, "User not found!");
+                    //return View(model);
                 }
-                ModelState.AddModelError(string.Empty,"Invalid login attempt");
+                else
+                {
+                    var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, isPersistent: model.RememberMe, false);
+                    if (result.Succeeded)
+                    {
+                        //returnUrl parameter is automatically mapped by the framework and pass to our action
+                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        {
+                            //Use LocalRedirect instead of redirect to avoid open redirect attack
+                            return LocalRedirect(returnUrl);
+                        }
+                        return RedirectToAction("Index", "Home");
+                    }
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt");
+                }
+                
+                
             }
             return View(model);
+
         }
 
         [HttpGet]
@@ -103,6 +115,11 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //If signed-in user is an admin
+                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUser", "Administration");
+                    }
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

@@ -35,7 +35,11 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore
             //Add built-in service Indentity for Authentication & Authorization
             services.AddIdentity<IdentityUser, IdentityRole>(
                     //customize property of Identity options
-                    options => options.Password.RequireNonAlphanumeric = false
+                    options => { 
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.User.AllowedUserNameCharacters += " ";
+                    }
+
                 )
                 .AddEntityFrameworkStores<AppDbContext>();
 
