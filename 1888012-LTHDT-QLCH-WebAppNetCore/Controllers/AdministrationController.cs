@@ -6,6 +6,8 @@ using _1888012_LTHDT_QLCH_WebAppNetCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
 {
@@ -17,12 +19,15 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ILogger<AdministrationController> logger;
 
         public AdministrationController(RoleManager<IdentityRole> roleManager,
-                                    UserManager<IdentityUser> userManager)
+                                    UserManager<IdentityUser> userManager,
+                                    ILogger<AdministrationController> logger)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -145,16 +150,27 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
             }
             else
             {
-                var result = await roleManager.DeleteAsync(role);
-                if (result.Succeeded)
+                try
                 {
-                    return RedirectToAction("ListRole");
+                    var result = await roleManager.DeleteAsync(role);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ListRole");
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View("ListRole");
                 }
-                foreach (var error in result.Errors)
+                catch (DbUpdateException e)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    //logger.LogError($"Error deleting role {e}");
+                    ViewBag.ErrorTitle = $"{role.Name} is in use";
+                    ViewBag.ErrorMessage = $"{role.Name} cannot be deleted" +
+                        $" try to remove all users in the role first!";
+                    return View("Error");
                 }
-                return View("ListRole");
             }
 
         }
@@ -164,6 +180,65 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
         {
             var roles = roleManager.Roles;
             return View(roles);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ManageRolesInUser(string userId)
+        {
+            ViewBag.userId = userId;
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id: {userId} not found!";
+                return RedirectToAction("Error");
+            }
+            var model = new List<RoleUserViewModel>();
+            foreach (var role in roleManager.Roles.ToList())
+            {
+                var roleUserViewModel = new RoleUserViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+                if (await userManager.IsInRoleAsync(user,role.Name))
+                {
+                    roleUserViewModel.IsSelected = true;
+                }
+                else
+                {
+                    roleUserViewModel.IsSelected = false;
+                }
+                model.Add(roleUserViewModel);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ManageRolesInUser(List<RoleUserViewModel> model, string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id: {userId} not found!";
+                return RedirectToAction("Error");
+            }
+            var roles = await userManager.GetRolesAsync(user);
+            var result = await userManager.RemoveFromRolesAsync(user, roles);
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Cannot remove user existing roles");
+                return View(model);
+            }
+
+            result = await userManager.AddToRolesAsync(user, model.Where(x => x.IsSelected)
+                .Select(y => y.RoleName));
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Cannot add selected roles to the user!");
+                return View(model);
+            }
+
+            return RedirectToAction("EditUser", new { Id = userId });
+
         }
 
         [HttpGet]
