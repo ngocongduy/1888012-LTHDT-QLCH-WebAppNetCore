@@ -20,22 +20,22 @@ This layer is the intermediate controlling data transactions between clients and
 
 
 App description: This web app is a very simple Store Management which can help the users (store staff) track products in the store.
-I. View (Presentation layer)
-  1. Login (default route) & Register: In order to join, you must register for an account and log in
+1. View (Presentation layer)
+  	2. Login (default route) & Register: In order to join, you must register for an account and log in
 	2. Home
-		+ Homepage: Index page give you 2 options for generating reports: StockByType & OutOfDate
-		+ Thong ke theo loai: StockByType
-		+ Thong ke theo HSD: OutOfDate
-	3. Product: you can add/ update/ delete/ and search for product type and product by routing among this category
+	+ Homepage: Index page give you 2 options for generating reports: StockByType & OutOfDate
+	+ Thong ke theo loai: StockByType
+	+ Thong ke theo HSD: OutOfDate
+	2. Product: you can add/ update/ delete/ and search for product type and product by routing among this category
 		+ Them/ Cap nhat/ Xoa/ Tim kiem san pham: Detail
 		+ Tim kiem/ Cap nhat/ Xoa san pham: Search
 		+ THem/ Cap nhat/ Xoa/ Tim Kiem loai san pham: ProductType
 		+ Tim kiem/ Cap nhat/ Xoa loai san pham: SearchType
-	3. Stock: you can add/ update/ delete/ and search for records of products in and out the Store
+	2. Stock: you can add/ update/ delete/ and search for records of products in and out the Store
 		+ Them/ Cap nhat/ Xoa/ Tim kiem phieu nhap: StockIn
 		+ Them/ Cap nhat/ Xoa/ Tim kiem don hang: StockOut
-II. Model & ViewModel (Business layer and Presentation layer)
-	1. Model:
+1. Model & ViewModel (Business layer and Presentation layer)
+	2. Model:
 		+ Lop san pham: Product
 		+ Lop loai san phan: ProductType
 		+ Lop phieu nhap va don hang: StockTrackDetail
@@ -47,13 +47,13 @@ II. Model & ViewModel (Business layer and Presentation layer)
 		+ Dung cho cac View lien quan den loai san pham: ProductTypeViewModel
 		+ Dung cho cac View lien quan den phieu nhap: StockInViewModel
 		+ Dung cho cac View lien quan den ban hang: StockOutViewModel
-III. Controller (Business layer)
-	1. Dieu khien cac View lien quan den san pham va loai san pham: ProductController
+1. Controller (Business layer)
+	2. Dieu khien cac View lien quan den san pham va loai san pham: ProductController
 	2. Dieu khien cac View lien quan den phieu nhap va don hang: StockController
-	3. Dieu khien cac View lien quan den trang chu va thong ke: HomeController
+	2 Dieu khien cac View lien quan den trang chu va thong ke: HomeController
 
-IV. Data accesslayer (DAL): to read and write files in folder root/data
-	1. Du lieu cua san pham: product.json
+1. Data accesslayer (DAL): to read and write files in folder root/data
+	2. Du lieu cua san pham: product.json
 	2. Du lieu cua loai san pham: product_type.json
-	3. Du lieu phieu nhap: stock_in.json
-	4. Du lieu don hang: stock_out.json
+	2. Du lieu phieu nhap: stock_in.json
+	2. Du lieu don hang: stock_out.json
