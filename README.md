@@ -11,7 +11,7 @@ I publish it just for personal use during learning. You are free to use if it he
 - View: Razor pages responded to clients. Each view may use one or more ViewModel for DataBinding when clients send requests to the server and vice versa.
 - Model: a collection of Model (for general uses) and ViewModel (for View)
 
-#### I. 3-layer
+#### II. 3-layer
 - Presentation layer (PL): This are plain pages sent by server and rendered by a browser on clients. It performs client-side works (using Javascript and relating library) such as data validation.
 If required, it will send requests to server on behalf of the user. Then PL mainly work with Views.
 (Upon a client's request, server will pick a corresponding view, do some required works (thanks to a cooperation in M-V-C) then generate a html-page, finally send it to client for rendering.)
@@ -21,7 +21,7 @@ This layer is the intermediate controlling data transactions between clients and
 
 
 ### App description: This web app is a very simple Store Management which can help the users (store staff) track products in the store.
-#### 1. View (Presentation layer)
+#### 1. View (Presentation layer) ####
   	1. Login (default route) & Register: In order to join, you must register for an account and log in
 	1. Home
 		+ Homepage: Index page give you 2 options for generating reports: StockByType & OutOfDate
@@ -34,7 +34,7 @@ This layer is the intermediate controlling data transactions between clients and
 		+ Tim kiem/ Cap nhat/ Xoa loai san pham: SearchType
 	1. Stock: you can add/ update/ delete/ and search for records of products in and out the Store
 		+ Them/ Cap nhat/ Xoa/ Tim kiem phieu nhap: StockIn
-		+ Them/ Cap nhat/ Xoa/ Tim kiem don hang: StockOut
+		+ Them/ Cap nhat/ Xoa/ Tim kiem don hang: StockOut 
 #### 1. Model & ViewModel (Business layer and Presentation layer)
 	1. Model:
 		+ Lop san pham: Product
