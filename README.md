@@ -11,10 +11,49 @@ MVC
 - Model: a collection of Model (for general uses) and ViewModel (for View)
 
 3-layer
-- User interface (UI): This are plain pages sent by server and rendered by a browser on clients. It performs client-side works (using Javascript and relating library) such as data validation.
-If required, it will send requests to server on behalf of the user. Then UI mainly work with Views.
+- Presentation layer (PL): This are plain pages sent by server and rendered by a browser on clients. It performs client-side works (using Javascript and relating library) such as data validation.
+If required, it will send requests to server on behalf of the user. Then PL mainly work with Views.
 (Upon a client's request, server will pick a corresponding view, do some required works (thanks to a cooperation in M-V-C) then generate a html-page, finally send it to client for rendering.)
 - Business layer (BL): This layer is a hidden working environment in the server, the playground for Models, Views and Controllers. It is where main operations done: routing inside the app, authorization, authentications, data queries and so on.
 This layer is the intermediate controlling data transactions between clients and databases.
 - Data access layer (DL): The layer standing some models to help you interect with databases. In this case is SQL server. You can also define models to work with your local storages.
 
+
+App description: This web app is a very simple Store Management which can help the users (store staff) track products in the store.
+I. View (Presentation layer)
+  1. Login (default route) & Register: In order to join, you must register for an account and log in
+	2. Home
+		+ Homepage: Index page give you 2 options for generating reports: StockByType & OutOfDate
+		+ Thong ke theo loai: StockByType
+		+ Thong ke theo HSD: OutOfDate
+	3. Product: you can add/ update/ delete/ and search for product type and product by routing among this category
+		+ Them/ Cap nhat/ Xoa/ Tim kiem san pham: Detail
+		+ Tim kiem/ Cap nhat/ Xoa san pham: Search
+		+ THem/ Cap nhat/ Xoa/ Tim Kiem loai san pham: ProductType
+		+ Tim kiem/ Cap nhat/ Xoa loai san pham: SearchType
+	3. Stock: you can add/ update/ delete/ and search for records of products in and out the Store
+		+ Them/ Cap nhat/ Xoa/ Tim kiem phieu nhap: StockIn
+		+ Them/ Cap nhat/ Xoa/ Tim kiem don hang: StockOut
+II. Model & ViewModel (Business layer and Presentation layer)
+	1. Model:
+		+ Lop san pham: Product
+		+ Lop loai san phan: ProductType
+		+ Lop phieu nhap va don hang: StockTrackDetail
+		+ Giao thuc: IProductRepository (*)
+		+ Lop thuc thi: MockProductRepository (*)
+		(*) Su dung cho Constructor Dependency Injection - Chi dung cho ProductController
+	2. ViewModel: cac lop du lieu trung gian de tuong tac giua Controller va View
+		+ Dung cho cac View lien quan den san pham: ProductViewModel
+		+ Dung cho cac View lien quan den loai san pham: ProductTypeViewModel
+		+ Dung cho cac View lien quan den phieu nhap: StockInViewModel
+		+ Dung cho cac View lien quan den ban hang: StockOutViewModel
+III. Controller (Business layer)
+	1. Dieu khien cac View lien quan den san pham va loai san pham: ProductController
+	2. Dieu khien cac View lien quan den phieu nhap va don hang: StockController
+	3. Dieu khien cac View lien quan den trang chu va thong ke: HomeController
+
+IV. Data accesslayer (DAL): to read and write files in folder root/data
+	1. Du lieu cua san pham: product.json
+	2. Du lieu cua loai san pham: product_type.json
+	3. Du lieu phieu nhap: stock_in.json
+	4. Du lieu don hang: stock_out.json
