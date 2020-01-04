@@ -3,7 +3,7 @@ A basic web app with net core 3.0
 
 ### Preface: 
 This is my first web app made during learning. Most of the work of my app are originated from the internet, especially thanks to the tutorial for ASP NET CORE of sir Kuvenkat - PragimTech. I publish the app just for personal use, howerver, you feel free to use if it helps.
-**Information you infer from my work should be only use as a source of reference and not guaranteed correct.**
+**Information you infer from my work shall be used as a source of reference and not guaranteed correct.**
 :monkey_face:
 
 ### Design architecture: MVC & 3-layer
@@ -13,11 +13,10 @@ This is my first web app made during learning. Most of the work of my app are or
 - Model: a collection of Model (for general uses) and ViewModel (for View)
 
 #### II. 3-layer
-- Presentation layer (PL): There are plain pages sent by server and rendered by a browser on clients. It performs client-side works (using Javascript and relating library) such as data validation. If required, it will send requests to server on behalf of the user. Then PL mainly work with Views.
-(Upon a client's request, server will pick a corresponding view, do some required works (thanks to a cooperation in M-V-C) then generate a html-page, finally send it to client for rendering.)
-- Business layer (BL): This layer is a hidden working environment in the server, the playground for Models, Views and Controllers. It is where main operations done: routing inside the app, authorization, authentications, data queries and so on.
-This layer is the intermediate controlling data transactions between clients and databases.
-- Data access layer (DL): The layer standing some models to help you interect with databases. In this case is SQL server. You can also define models to work with your local storages.
+- Presentation layer (PL): Here containing plain pages generated and sent by server then they are rendered by a browser on clients. They perform client-side works (using Javascript and relating library) such as data validation. If required, they will send requests to server on behalf of the user. Hence PL mainly work withs Views.
+(Upon a client's request, server will pick a corresponding view, do some required works (thanks to the cooperation of M-V-C) then generate a html-page, finally send it to client for rendering.)
+- Business layer (BL): This layer is the playground for Models, Views and Controllers. It is where main operations done: routing inside the app, authorization, authentications, data queries and so on. This layer is the intermediate accounted for controlling data transactions between clients and databases.
+- Data access layer (DL): The layer standing some models to help you interect with many kinds of data storage. In this case is SQL server. You can also define models to work with your local storages.
 
 
 ### App description: This web app is a very simple Store Management which can help the users (store staff) track products in the store.
@@ -25,42 +24,46 @@ This layer is the intermediate controlling data transactions between clients and
   	1. Login (default route) & Register: In order to join, you must register for an account and log in
 	1. Home
 		+ Homepage: Index page give you 2 options for generating reports: StockByType & OutOfDate
-		+ Thong ke theo loai: StockByType
-		+ Thong ke theo HSD: OutOfDate
+		+ Report for stocks grouped in types: StockByType
+		+ Report for expired stocks: OutOfDate
 	1. Product: you can add/ update/ delete/ and search for product type and product by routing among this category
-		+ Them/ Cap nhat/ Xoa/ Tim kiem san pham: Detail
-		+ Tim kiem/ Cap nhat/ Xoa san pham: Search
-		+ THem/ Cap nhat/ Xoa/ Tim Kiem loai san pham: ProductType
-		+ Tim kiem/ Cap nhat/ Xoa loai san pham: SearchType
+		+ For product: Detail & Search
+		+ For product type: ProductType & SearchType
 	1. Stock: you can add/ update/ delete/ and search for records of products in and out the Store
-		+ Them/ Cap nhat/ Xoa/ Tim kiem phieu nhap: StockIn
-		+ Them/ Cap nhat/ Xoa/ Tim kiem don hang: StockOut 
+		+ Track stock in: StockIn
+		+ Track stock out: StockOut 
 1. __Model & ViewModel (Business layer and Presentation layer)__
 	1. Model:
-		+ Lop san pham: Product
-		+ Lop loai san phan: ProductType
-		+ Lop phieu nhap va don hang: StockTrackDetail
-		+ Giao thuc: IProductRepositor *(For Constructor Dependency Injection - Only for ProductController)*
-		+ Lop thuc thi: MockProductRepository 
+		+ Class for product: Product
+		+ Class for product: ProductType
+		+ Class for tracking stock: StockTrackDetail
+		+ Interface: IProductRepositor *(For Constructor Dependency Injection - Only for ProductController)*
+		+ Implementation for IProductRepository: MockProductRepository *(For local storage -> Can be switched to Database)*
+		+ Class for database access: AppDbContext
+		+ Class for Authorization service: ClaimStore & UserClaim
+		+ Class to customize built-in IdentityUser: ApplicationUser *(currently not used)*
+		+ Class for Error views: ErrorView
 	1. ViewModel: cac lop du lieu trung gian de tuong tac giua Controller va View
-		+ Dung cho cac View lien quan den san pham: ProductViewModel
-		+ Dung cho cac View lien quan den loai san pham: ProductTypeViewModel
-		+ Dung cho cac View lien quan den phieu nhap: StockInViewModel
-		+ Dung cho cac View lien quan den ban hang: StockOutViewModel
+		+ Product views: ProductViewModel
+		+ ProductType views: ProductTypeViewModel
+		+ StockIn views: StockInViewModel
+		+ StockOut views: StockOutViewModel
+		+ and so on...
 1. __Controller (Business layer)__
 	1. Register new account and login control: AccountController
 	1. User role/claim management: AdministrationController
 	1. Product and produc type management: ProductController 
 	1. Stock tracking: StockController
 	1. Home page and reports: HomeController
+	1. To log and render error page (error handling): ErrorController *(currently not used)*
 
-1. __Data accesslayer (DAL): to read and write files in folder root/data__
+1. __Data access layer (DAL)__
 	1. To read and write files in folder root/data
-		+ Du lieu cua san pham: product.json
-		+ Du lieu cua loai san pham: product_type.json
-		+ Du lieu phieu nhap: stock_in.json
-		+ Du lieu don hang: stock_out.json
-	1. Migrations folder: code-first approach to generate SQL server database users and relating activity (framework built-in IdentityUser)
+		+ Product data: product.json
+		+ Product type data: product_type.json
+		+ Stock in records: stock_in.json
+		+ Stock out records: stock_out.json
+	1. Migrations folder: tracking records during migration/update database scheme - code-first approach
 	
 ### Reading guide:
 *Like other dot net apps, the app contains basics files and folders created conventionally*
@@ -83,7 +86,7 @@ This layer is the intermediate controlling data transactions between clients and
 	- This folder contrain all views (razor pages) for the app. Views grouped by Controller-oriented. Such as sub-folder 'Account' will contains all views which can be accessed by action-based in the corresponding controller 'AccountController'. The framework will automatically works by default unless naming controller is not violated. 
 	- Sub folder 'Shared' will be looked up if no views in the above routing rule found. *_Layout.cshtml* will help you create template for your Views
 	- *_ViewImports.cshtml* & *_ViewStart.cshtml* will work with '_Layout.cshtml' to help you create template (common use code block) over all views.
-1. __DAL__: Data access layer files will be here
+1. __DAL__: Data access layer files shall be here.
 1. __Migrations__: *Default folder generated by the framework*. This folder contains files to help you tracking database migration/update when using code-first database creation approach.
 1. __Utilities__: Some additional/optional services can be made here.
 
