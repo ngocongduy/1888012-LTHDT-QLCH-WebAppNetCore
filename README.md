@@ -13,8 +13,7 @@ This is my first web app made during learning. Most of the work of my app are or
 - Model: a collection of Model (for general uses) and ViewModel (for View)
 
 #### II. 3-layer
-- Presentation layer (PL): This are plain pages sent by server and rendered by a browser on clients. It performs client-side works (using Javascript and relating library) such as data validation.
-If required, it will send requests to server on behalf of the user. Then PL mainly work with Views.
+- Presentation layer (PL): There are plain pages sent by server and rendered by a browser on clients. It performs client-side works (using Javascript and relating library) such as data validation. If required, it will send requests to server on behalf of the user. Then PL mainly work with Views.
 (Upon a client's request, server will pick a corresponding view, do some required works (thanks to a cooperation in M-V-C) then generate a html-page, finally send it to client for rendering.)
 - Business layer (BL): This layer is a hidden working environment in the server, the playground for Models, Views and Controllers. It is where main operations done: routing inside the app, authorization, authentications, data queries and so on.
 This layer is the intermediate controlling data transactions between clients and databases.
@@ -65,9 +64,10 @@ This layer is the intermediate controlling data transactions between clients and
 	
 ### Reading guide:
 *Like other dot net apps, the app contains basics files and folders created conventionally*
+[Whole folder here](https://github.com/ngocongduy/1888012-LTHDT-QLCH-WebAppNetCore/tree/master/1888012-LTHDT-QLCH-WebAppNetCore)
 1. __Program.cs__: Firstly read when the app runs
 1. __appsettings.json and appsettings.Development.json__: Contain pre-configured settings for the app in both development and production environment
-1.__Properties folder__: contains lauchSettings.json which help you to configure launching environment and properties for the app such as:
+1. __Properties folder__: contains lauchSettings.json which help you to configure launching environment and properties for the app such as:
 	- environmentVariables: Developement/Testing/Stagging/Production
 	- applicationUrl
 	- and so on ...
