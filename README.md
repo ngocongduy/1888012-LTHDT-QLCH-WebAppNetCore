@@ -21,39 +21,39 @@ This layer is the intermediate controlling data transactions between clients and
 
 App description: This web app is a very simple Store Management which can help the users (store staff) track products in the store.
 1. View (Presentation layer)
-  	2. Login (default route) & Register: In order to join, you must register for an account and log in
-	2. Home
-	+ Homepage: Index page give you 2 options for generating reports: StockByType & OutOfDate
-	+ Thong ke theo loai: StockByType
-	+ Thong ke theo HSD: OutOfDate
-	2. Product: you can add/ update/ delete/ and search for product type and product by routing among this category
+  	1. Login (default route) & Register: In order to join, you must register for an account and log in
+	1. Home
+		+ Homepage: Index page give you 2 options for generating reports: StockByType & OutOfDate
+		+ Thong ke theo loai: StockByType
+		+ Thong ke theo HSD: OutOfDate
+	1. Product: you can add/ update/ delete/ and search for product type and product by routing among this category
 		+ Them/ Cap nhat/ Xoa/ Tim kiem san pham: Detail
 		+ Tim kiem/ Cap nhat/ Xoa san pham: Search
 		+ THem/ Cap nhat/ Xoa/ Tim Kiem loai san pham: ProductType
 		+ Tim kiem/ Cap nhat/ Xoa loai san pham: SearchType
-	2. Stock: you can add/ update/ delete/ and search for records of products in and out the Store
+	1. Stock: you can add/ update/ delete/ and search for records of products in and out the Store
 		+ Them/ Cap nhat/ Xoa/ Tim kiem phieu nhap: StockIn
 		+ Them/ Cap nhat/ Xoa/ Tim kiem don hang: StockOut
 1. Model & ViewModel (Business layer and Presentation layer)
-	2. Model:
+	1. Model:
 		+ Lop san pham: Product
 		+ Lop loai san phan: ProductType
 		+ Lop phieu nhap va don hang: StockTrackDetail
 		+ Giao thuc: IProductRepository (*)
 		+ Lop thuc thi: MockProductRepository (*)
-		(*) Su dung cho Constructor Dependency Injection - Chi dung cho ProductController
-	2. ViewModel: cac lop du lieu trung gian de tuong tac giua Controller va View
+		__(*) Su dung cho Constructor Dependency Injection - Chi dung cho ProductController__
+	1. ViewModel: cac lop du lieu trung gian de tuong tac giua Controller va View
 		+ Dung cho cac View lien quan den san pham: ProductViewModel
 		+ Dung cho cac View lien quan den loai san pham: ProductTypeViewModel
 		+ Dung cho cac View lien quan den phieu nhap: StockInViewModel
 		+ Dung cho cac View lien quan den ban hang: StockOutViewModel
 1. Controller (Business layer)
-	2. Dieu khien cac View lien quan den san pham va loai san pham: ProductController
-	2. Dieu khien cac View lien quan den phieu nhap va don hang: StockController
-	2 Dieu khien cac View lien quan den trang chu va thong ke: HomeController
+	1. Dieu khien cac View lien quan den san pham va loai san pham: ProductController
+	1. Dieu khien cac View lien quan den phieu nhap va don hang: StockController
+	1 Dieu khien cac View lien quan den trang chu va thong ke: HomeController
 
 1. Data accesslayer (DAL): to read and write files in folder root/data
-	2. Du lieu cua san pham: product.json
-	2. Du lieu cua loai san pham: product_type.json
-	2. Du lieu phieu nhap: stock_in.json
-	2. Du lieu don hang: stock_out.json
+	1. Du lieu cua san pham: product.json
+	1. Du lieu cua loai san pham: product_type.json
+	1. Du lieu phieu nhap: stock_in.json
+	1. Du lieu don hang: stock_out.json
