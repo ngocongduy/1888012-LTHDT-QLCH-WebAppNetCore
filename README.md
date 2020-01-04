@@ -38,12 +38,12 @@ This is my first web app made during learning. Most of the work of my app are or
 		+ Class for product: ProductType
 		+ Class for tracking stock: StockTrackDetail
 		+ Interface: IProductRepositor *(For Constructor Dependency Injection - Only for ProductController)*
-		+ Implementation for IProductRepository: MockProductRepository *(For local storage -> Can be switched to Database)*
+		+ Implementation for IProductRepository: MockProductRepository *(For mock test)*
 		+ Class for database access: AppDbContext
 		+ Class for Authorization service: ClaimStore & UserClaim
-		+ Class to customize built-in IdentityUser: ApplicationUser *(currently not used)*
+		+ Class to customize built-in IdentityUser: ApplicationUser *(Currently not used)*
 		+ Class for Error views: ErrorView
-	1. ViewModel: cac lop du lieu trung gian de tuong tac giua Controller va View
+	1. ViewModel: intermediate models for views to interact/ databinding with controller easier
 		+ Product views: ProductViewModel
 		+ ProductType views: ProductTypeViewModel
 		+ StockIn views: StockInViewModel
@@ -66,7 +66,7 @@ This is my first web app made during learning. Most of the work of my app are or
 	1. Migrations folder: tracking records during migration/update database scheme - code-first approach
 	
 ### Reading guide:
-*Like other dot net apps, the app contains basics files and folders created conventionally*
+*Like other dot net apps, the app contains basic files and folders created conventionally*
 [Whole folder here](https://github.com/ngocongduy/1888012-LTHDT-QLCH-WebAppNetCore/tree/master/1888012-LTHDT-QLCH-WebAppNetCore)
 1. __Program.cs__: Firstly read when the app runs
 1. __appsettings.json and appsettings.Development.json__: Contain pre-configured settings for the app in both development and production environment
@@ -81,7 +81,7 @@ This is my first web app made during learning. Most of the work of my app are or
 1. __wwwwroot__: this folder is your app local storage, you should call 'UseStaticFiles' middleware to work on this folder
 1. __Controllers__: *Default names for MVC design pattern, should not change*. This folder should contains all controllers used in your app
 1. __Models__: *Default names for MVC design pattern, should not change*. You define your models in here.
-1. __ViewModels__: For sub-models (made/extended from models) should be stored here.
+1. __ViewModels__: For models for views (made/extended from models) should be stored here.
 1. __Views__: 
 	- This folder contrain all views (razor pages) for the app. Views grouped by Controller-oriented. Such as sub-folder 'Account' will contains all views which can be accessed by action-based in the corresponding controller 'AccountController'. The framework will automatically works by default unless naming controller is not violated. 
 	- Sub folder 'Shared' will be looked up if no views in the above routing rule found. *_Layout.cshtml* will help you create template for your Views
