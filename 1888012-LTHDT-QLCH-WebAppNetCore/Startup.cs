@@ -40,10 +40,18 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore
                     options => { 
                         options.Password.RequireNonAlphanumeric = false;
                         options.User.AllowedUserNameCharacters += " ";
+
+                        //options.SignIn.RequireConfirmedEmail = true;
+                        //options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
+
+                        //Customize account lockout properties
+                        options.Lockout.MaxFailedAccessAttempts = 5;
+                        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
                     }
 
                 )
-                .AddEntityFrameworkStores<AppDbContext>();
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders(); //Default token service
 
             services.AddControllersWithViews(options => {
                 //Make a global authentication policy for our app
