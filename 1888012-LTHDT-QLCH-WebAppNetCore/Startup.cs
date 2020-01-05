@@ -69,9 +69,12 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore
                                     .RequireRole("Admin"));
 
                 //Add policy with customized requirements -> Remember to register it as below
+                //Handlers in one Requirement work as OR relation
                 options.AddPolicy("EditRolePolicy",
                     policy => policy.AddRequirements( new ManageAdminRoleAndClaimRequirement()));
-
+                
+                //Use this option to customize - the whole requirement will fail if one handler fails
+                //options.InvokeHandlersAfterFailure = false; //default is true
 
             });
 

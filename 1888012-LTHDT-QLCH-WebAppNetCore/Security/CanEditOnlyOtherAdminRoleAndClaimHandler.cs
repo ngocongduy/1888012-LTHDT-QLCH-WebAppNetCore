@@ -44,6 +44,12 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Security
             {
                 context.Succeed(requirement);
             }
+            /* Use Fail() to ensure that if this hanlder fail => the whole requirement will fail
+            else
+            {
+                context.Fail();
+            }
+            */
             return Task.CompletedTask;
         }
     }

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>_1888012_LTHDT_QLCH_WebAppNetCore</RootNamespace>
+    <UserSecretsId>c71da54e-f7de-4b23-9151-39342a53cf15</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
