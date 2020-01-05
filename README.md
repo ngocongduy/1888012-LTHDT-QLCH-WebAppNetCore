@@ -2,7 +2,7 @@
 A basic web app with net core 3.0
 
 ### Preface: 
-This is my first web app made during learning. Most of the work of my app are originated from the internet, especially thanks to the tutorial for ASP NET CORE of sir Kuvenkat - PragimTech. I publish the app just for personal use, howerver, you feel free to use if it helps.
+This is my first web app made during learning. Most of the work of my app are originated from the internet, especially thanks to the tutorial for ASP.NET CORE of sir Kudvenkat - PragimTech. I publish the app just for personal use, howerver, you feel free to try and hope it helps.
 **Information you infer from my work shall be used as a source of reference and not guaranteed correct.**
 :monkey_face:
 
