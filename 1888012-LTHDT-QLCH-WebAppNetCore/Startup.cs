@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using _1888012_LTHDT_QLCH_WebAppNetCore.Models;
+using _1888012_LTHDT_QLCH_WebAppNetCore.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -62,16 +63,27 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore
             services.AddAuthorization(options =>
             {
                 //To satisfy the policy, user must have all Claims prescribed
+                //RequireClaim, RequireRole, RequireAssertion are all built-in
                 options.AddPolicy("DeleteRolePolicy", 
-                    policy => policy.RequireClaim("Delete Role"));
+                    policy => policy.RequireClaim("Delete Role")
+                                    .RequireRole("Admin"));
+
+                //Add policy with customized requirements -> Remember to register it as below
                 options.AddPolicy("EditRolePolicy",
-                    policy => policy.RequireClaim("Edit Role"));
+                    policy => policy.AddRequirements( new ManageAdminRoleAndClaimRequirement()));
+
+
             });
 
 
             //Add DI service here 
             //AddScoped to request for a new service everytime it is called
             services.AddScoped<IProductRepository,MockProductRepository>();
+
+            //Register for our customized requirements to be called
+            //services.AddTransient<IHttpContextAccessor, HttpContextAccessor>(); - automatically inject???
+            services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRoleAndClaimHandler>();
+            services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
 
         }
 

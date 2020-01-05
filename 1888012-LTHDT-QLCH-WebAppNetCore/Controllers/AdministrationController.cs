@@ -196,6 +196,7 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "EditRolePolicy")] //You must add policy in both View and Controller for security
         public async Task<IActionResult> ManageRolesInUser(string userId)
         {
             ViewBag.userId = userId;
@@ -226,6 +227,7 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageRolesInUser(List<RoleUserViewModel> model, string userId)
         {
             var user = await userManager.FindByIdAsync(userId);
@@ -314,8 +316,6 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
         }
 
         [HttpGet]
-        //You must add policy in both View and Controller for security
-        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
@@ -343,8 +343,7 @@ namespace _1888012_LTHDT_QLCH_WebAppNetCore.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [Authorize(Policy = "EditRolePolicy")]
+        [HttpPost]      
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             var role = await roleManager.FindByIdAsync(model.Id);
